@@ -8,6 +8,8 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
+  name: string | undefined;
+
   constructor(private modalCtrl: ModalController) {}
 
   fechar() {
