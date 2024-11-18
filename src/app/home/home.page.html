@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> As minhas notas </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" mode="md">
+  <ion-segment value="default">
+    <ion-segment-button value="default">
+      <ion-label>To Do</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="segment">
+      <ion-label>Done</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    button
+    expand="block"
+    (click)="openModal()"
+  >
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label>Atividade 1</ion-label>
+  </ion-item>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label> Atividade 2 </ion-label>
+  </ion-item>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label class="ion-text-nowrap"> Atividade 3 </ion-label>
+  </ion-item>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label class="ion-text-nowrap"> Atividade 4 </ion-label>
+  </ion-item>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label class="ion-text-nowrap"> Atividade 5 </ion-label>
+  </ion-item>
+
+  <ion-item button expand="block" (click)="openModal()">
+    <ion-label class="ion-text-nowrap"> Atividade 6 </ion-label>
+  </ion-item>
+</ion-content>
