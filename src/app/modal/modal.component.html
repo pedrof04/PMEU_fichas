@@ -1,25 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button color="dark" (click)="fechar()" [strong]="true"
-        >Fechar</ion-button
-      >
-    </ion-buttons>
-    <ion-title>Notas</ion-title>
+    <ion-title>Nova nota</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="dark" (click)="apagar()" [strong]="true"
-        >Apagar</ion-button
-      >
+      <ion-button (click)="closeModal()">Fechar</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
+
+<ion-content>
   <ion-item>
-    <ion-input
-      labelPlacement="stacked"
-      label="Adiciona uma nota"
-      [(ngModel)]="name"
-      placeholder="..."
-    ></ion-input>
+    <ion-label position="stacked">Description</ion-label>
+    <ion-textarea [(ngModel)]="newNote.description"></ion-textarea>
   </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">State</ion-label>
+    <ion-select [(ngModel)]="newNote.state">
+      <ion-select-option value="TODO">TO DO</ion-select-option>
+      <ion-select-option value="IN_PROGRESS">In Progress</ion-select-option>
+      <ion-select-option value="DONE">Done</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Priority</ion-label>
+    <ion-select [(ngModel)]="newNote.priority">
+      <ion-select-option value="LOW">Low</ion-select-option>
+      <ion-select-option value="NORMAL">Normal</ion-select-option>
+      <ion-select-option value="HIGH">High</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="saveNote()">Save Note</ion-button>
 </ion-content>

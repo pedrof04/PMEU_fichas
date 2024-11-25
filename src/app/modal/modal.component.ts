@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -8,15 +7,19 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  name: string | undefined;
+  newNote = {
+    description: '',
+    state: 'TODO',
+    priority: 'NORMAL',
+  };
 
   constructor(private modalCtrl: ModalController) {}
 
-  fechar() {
-    return this.modalCtrl.dismiss(null, 'fechar');
+  closeModal() {
+    this.modalCtrl.dismiss(null, 'cancel');
   }
 
-  apagar() {
-    return;
+  saveNote() {
+    this.modalCtrl.dismiss(this.newNote, 'save');
   }
 }

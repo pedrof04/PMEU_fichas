@@ -46,7 +46,10 @@ export class HomePage implements OnInit {
       if (this.notes.length == 0) {
         await this.presentToast(`There are no notes available 😥`, 'warning');
       } else {
-        await this.presentToast(`Success getting ${this.notes.length} notes 🚀`, 'success');
+        await this.presentToast(
+          `Success getting ${this.notes.length} notes 🚀`,
+          'success'
+        );
       }
     } catch (error: any) {
       loading.dismiss();
@@ -54,10 +57,37 @@ export class HomePage implements OnInit {
     }
   }
 
+  async postNote(note: {
+    description: string;
+    state: string;
+    priority: string;
+  }) {
+    const loading = await this.showLoading();
+
+    const headers = new HttpHeaders({
+      Authorization: `Basic ${btoa(`${this.name}:${this.password}`)}`,
+    });
+
+    try {
+      await firstValueFrom(
+        this.http.post(`${this.apiUrl}/notes`, note, { headers })
+      );
+      loading.dismiss();
+
+      await this.presentToast('Note successfully created 🚀', 'success');
+
+      // Atualiza a lista de notas
+      await this.getNotes();
+    } catch (error: any) {
+      loading.dismiss();
+      await this.presentToast(error.error || 'Failed to create note', 'danger');
+    }
+  }
+
   async presentToast(message: string, color: string) {
     const toast = await this.toastController.create({
       message,
-      duration: 2000, 
+      duration: 2000,
       color,
       position: 'bottom',
     });
@@ -77,10 +107,15 @@ export class HomePage implements OnInit {
   async openModal() {
     const modal = await this.modalCtrl.create({
       component: ModalComponent,
-      backdropDismiss: false, // Modal fecha apenas se carregarmos no botao Fechar
+      backdropDismiss: false,
     });
-    modal.present();
+
+    await modal.present();
 
     const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'save' && data) {
+      await this.postNote(data); // Chama o método postNote com os dados do modal
+    }
   }
 }
