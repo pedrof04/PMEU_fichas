@@ -44,14 +44,24 @@ export class HomePage implements OnInit {
       );
       loading.dismiss();
       if (this.notes.length == 0) {
-        //await this.presentToast(`There are no notes available 😥`, 'warning');
+        await this.presentToast(`There are no notes available 😥`, 'warning');
       } else {
-        //await this.presentToast(`Success getting ${this.notes.length} notes 🚀`, 'success');
+        await this.presentToast(`Success getting ${this.notes.length} notes 🚀`, 'success');
       }
     } catch (error: any) {
       loading.dismiss();
-      //await this.presentToast(error.error, 'danger');
+      await this.presentToast(error.error, 'danger');
     }
+  }
+
+  async presentToast(message: string, color: string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 2000, 
+      color,
+      position: 'bottom',
+    });
+    await toast.present();
   }
 
   async showLoading() {
